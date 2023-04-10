@@ -47,21 +47,22 @@ RSpec.describe 'Items Index Page' do
 
     it "displays count of customers that have bought each item" do
       visit "/items"
+      save_and_open_page
 
       expect(@item_1.customer_items.count).to eq(3)
-      expect(page).to have_content("Count of Apple bought: 3")
+      expect(page).to have_content("Count of Apple bought by customers: 3")
 
       expect(@item_2.customer_items.count).to eq(1)
-      expect(page).to have_content("Count of Banana bought: 1")
+      expect(page).to have_content("Count of Banana bought by customers: 1")
 
       expect(@item_3.customer_items.count).to eq(1)
-      expect(page).to have_content("Count of Cheese bought: 1")
+      expect(page).to have_content("Count of Cheese bought by customers: 1")
 
       expect(@item_4.customer_items.count).to eq(1)
-      expect(page).to have_content("Count of Ham bought: 1")
+      expect(page).to have_content("Count of Ham bought by customers: 1")
 
-      expect(@item_4.customer_items.count).to eq(0)
-      expect(page).to have_content("Count of Stove bought: 0")
+      expect(@item_5.customer_items.count).to eq(0)
+      expect(page).to have_content("Count of Stove bought by customers: 0")
     end
   end
 end

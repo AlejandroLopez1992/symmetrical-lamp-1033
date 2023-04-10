@@ -32,7 +32,7 @@ RSpec.describe Item, type: :model do
       expect(@item_2.count_of_customer_items).to eq(1)
       expect(@item_3.count_of_customer_items).to eq(1)
       expect(@item_4.count_of_customer_items).to eq(1)
-      expect(@item_4.count_of_customer_items).to eq(0)
+      expect(@item_5.count_of_customer_items).to eq(0)
     end
   end
 end
