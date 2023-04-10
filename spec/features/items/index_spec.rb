@@ -18,7 +18,7 @@ RSpec.describe 'Items Index Page' do
     end
     it 'displays all items with their base attributes' do
       visit "/items"
-
+      save_and_open_page
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_1.price)
       expect(page).to have_content(@item_1.supermarket.name)
