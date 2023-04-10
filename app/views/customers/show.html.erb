@@ -1,0 +1,9 @@
+<h1><%= @customer.name %></h1>
+<%= content_tag :div, id: "items" do %>
+  <h2><%= "Items:" %></h2>
+  <% @customer.items.each do |item| %>
+  <p>Name: <%= item.name %></p>
+  <p>Price: <%= item.price %></p>
+  <p>Available at: <%= item.supermarket.name %></p>
+  <% end %>
+<% end %>
