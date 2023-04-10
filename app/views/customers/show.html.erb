@@ -7,3 +7,12 @@
   <p>Available at: <%= item.supermarket.name %></p>
   <% end %>
 <% end %>
+
+<%= content_tag :div, id: "add_item" do %>
+  <h2>Add new item:</h2>
+  <%= form_with url: "customer_items?customer=#{@customer.id}", method: :post, local: true do |f| %>
+  <p><%= f.label :item_id, 'Item ID:' %></p>
+  <p><%= f.text_field :item_id %></p>
+  <p><%= f.submit "Submit" %>
+  <% end %>
+<% end %>

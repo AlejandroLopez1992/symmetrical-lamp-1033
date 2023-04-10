@@ -46,12 +46,11 @@ RSpec.describe 'Customer Show Page' do
     end
 
     it 'when form is submitted a new item is added and customer is redirected to page where new item is shown' do
-
       visit "/customers/#{@customer.id}"
-
+      
       within('#add_item'){fill_in 'Item ID:', with: @item_4.id}
       within('#add_item'){click_button "Submit"}
-
+      
       expect(page).to have_current_path("/customers/#{@customer.id}")
 
       within('#items'){expect(page).to have_content("Name: Ham")}
