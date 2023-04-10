@@ -15,10 +15,15 @@ RSpec.describe 'Items Index Page' do
       @item_4 = @supermarket_2.items.create!(name: "Ham", price: 7)
       @customer_2 = Customer.create!(name: "Stevo")
       CustomerItem.create!(customer_id: @customer_2.id, item_id: @item_4.id)
+      @customer_3 = Customer.create!(name: "Bob")
+      CustomerItem.create!(customer_id: @customer_3.id, item_id: @item_1.id)
+      CustomerItem.create!(customer_id: @customer_2.id, item_id: @item_1.id)
+      @item_5 = @supermarket_2.items.create!(name: "Stove", price: 700)
+
     end
     it 'displays all items with their base attributes' do
       visit "/items"
-      save_and_open_page
+      
       expect(page).to have_content(@item_1.name)
       expect(page).to have_content(@item_1.price)
       expect(page).to have_content(@item_1.supermarket.name)
@@ -34,6 +39,29 @@ RSpec.describe 'Items Index Page' do
       expect(page).to have_content(@item_4.name)
       expect(page).to have_content(@item_4.price)
       expect(page).to have_content(@item_4.supermarket.name)
+
+      expect(page).to have_content(@item_5.name)
+      expect(page).to have_content(@item_5.price)
+      expect(page).to have_content(@item_5.supermarket.name)
+    end
+
+    it "displays count of customers that have bought each item" do
+      visit "/items"
+
+      expect(@item_1.customer_items.count).to eq(3)
+      expect(page).to have_content("Count of Apple bought: 3")
+
+      expect(@item_2.customer_items.count).to eq(1)
+      expect(page).to have_content("Count of Banana bought: 1")
+
+      expect(@item_3.customer_items.count).to eq(1)
+      expect(page).to have_content("Count of Cheese bought: 1")
+
+      expect(@item_4.customer_items.count).to eq(1)
+      expect(page).to have_content("Count of Ham bought: 1")
+
+      expect(@item_4.customer_items.count).to eq(0)
+      expect(page).to have_content("Count of Stove bought: 0")
     end
   end
 end
